@@ -1,9 +1,12 @@
 #include <QtWidgets/QApplication>
 #include <QQmlApplicationEngine>
+#include <QFontDatabase>
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+
+    QFontDatabase::addApplicationFont(":/materialdesignicons-webfont.ttf");
 
     QQmlApplicationEngine engine;
     QObject::connect(

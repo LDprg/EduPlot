@@ -2,13 +2,20 @@ import QtQuick
 import QtCharts
 import QtQuick.Layouts
 import QtQuick.Controls
+import QtQuick.Controls.Material
 
-Window {
+import "Icon.js" as MdiFont
+
+ApplicationWindow {
     id: window
     width: 640
     height: 480
     visible: true
     title: "Hello World"
+
+
+    Material.theme: Material.Dark
+    Material.accent: Material.Red
 
     RowLayout {
         anchors.fill: parent
@@ -19,7 +26,7 @@ Window {
             spacing: 10
 
             TextField {
-                text: "Hello World"
+                text: "x^2"
             }
 
             Button {
@@ -30,48 +37,58 @@ Window {
             }
         }
 
-        ChartView {
-            id: chart
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            antialiasing: true
-            legend.visible: false
+        ColumnLayout {
+            Layout.alignment: Qt.AlignTop
+            spacing: 10
 
-            MouseArea {
-                anchors.fill: parent
-                acceptedButtons: Qt.LeftButton
-                cursorShape: if (containsPress) Qt.DragMoveCursor
-
-                property real xStart: 0
-                property real yStart: 0
-
-                onPressed: {
-                    xStart = mouseX
-                    yStart = mouseY
-                }
-
-                onMouseYChanged: {
-                    chart.scrollUp(mouseY - yStart)
-                    yStart = mouseY
-                }
-
-                onMouseXChanged: {
-                    chart.scrollLeft(mouseX - xStart)
-                    xStart = mouseX
-                }
+            Button {
+                font.pixelSize: 32
+                text: MdiFont.Icon.home
             }
 
-            LineSeries {
-                id: line
+            ChartView {
+                id: chart
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                antialiasing: true
+                legend.visible: false
 
-                XYPoint {
-                    x: 0; y: 0
+                MouseArea {
+                    anchors.fill: parent
+                    acceptedButtons: Qt.LeftButton
+                    cursorShape: if (containsPress) Qt.DragMoveCursor
+
+                    property real xStart: 0
+                    property real yStart: 0
+
+                    onPressed: {
+                        xStart = mouseX
+                        yStart = mouseY
+                    }
+
+                    onMouseYChanged: {
+                        chart.scrollUp(mouseY - yStart)
+                        yStart = mouseY
+                    }
+
+                    onMouseXChanged: {
+                        chart.scrollLeft(mouseX - xStart)
+                        xStart = mouseX
+                    }
                 }
-                XYPoint {
-                    x: 6; y: 7
-                }
-                XYPoint {
-                    x: 10; y: 10
+
+                LineSeries {
+                    id: line
+
+                    XYPoint {
+                        x: 0; y: 0
+                    }
+                    XYPoint {
+                        x: 6; y: 7
+                    }
+                    XYPoint {
+                        x: 10; y: 10
+                    }
                 }
             }
         }

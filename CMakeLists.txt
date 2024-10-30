@@ -16,7 +16,10 @@ qt_add_qml_module(appEduPlot
     URI EduPlot
     VERSION 1.0
     QML_FILES
-        Main.qml
+            Icon.js
+
+            Main.qml
+    RESOURCES materialdesignicons-webfont.ttf
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
